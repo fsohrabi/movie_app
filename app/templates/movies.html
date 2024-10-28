@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Movies{% endblock %}
+
+{% block content %}
+<h3>Your Movies</h3>
+
+<!-- Add Movie Button -->
+<a href="{{ url_for('user_routes.add_movie') }}" class="btn btn-primary mb-3">Add New Movie</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Year</th>
+            <th>Rating</th>
+            <th>Genres</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movie in user_movies %}
+        <tr>
+            <td>{{ movie.name }}</td>
+            <td>{{ movie.director }}</td>
+            <td>{{ movie.year }}</td>
+            <td>{{ movie.rating }}</td>
+            <td>
+                {% for genre in movie.genres %}
+                    {{ genre.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <!-- Show Movie Details Button -->
+                <a href="{{ url_for('user_routes.show_movie', movie_id=movie.id) }}" class="btn btn-info">Show</a>
+
+                <!-- Add Review Button -->
+                <a href="{{ url_for('user_routes.update_movie', movie_id=movie.id) }}" class="btn btn-success">Update </a>
+
+                <!-- Delete Movie Button -->
+                <form action="{{ url_for('user_routes.delete_movie', movie_id=movie.id) }}" method="POST" style="display:inline-block;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

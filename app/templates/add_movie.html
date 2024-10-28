@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Movie{% endblock %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('user_routes.add_movie') }}">
+     {{ form.hidden_tag() }}
+    <div class="form-group">
+        <input type="text" name="name" class="form-control" placeholder="Movie Title" required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="director" class="form-control" placeholder="Director" required>
+    </div>
+    <div class="form-group">
+        <input type="number" name="year" class="form-control" placeholder="Year" required>
+    </div>
+    <div class="form-group">
+        <label for="rating">Rating (0-10):</label>
+        <input type="number" step="0.1" min="0" max="10" name="rating" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="genres">Select Genres</label>
+        <select name="genres" class="form-control" multiple>
+            {% for genre in genres %}
+                <option value="{{ genre.id }}">{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Add Movie</button>
+</form>
+{% endblock %}

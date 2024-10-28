@@ -1,0 +1,59 @@
+/* style.css */
+body {
+    background-color: #f4f7f6;  /* Light gray background */
+    font-family: 'Arial', sans-serif; /* Set a modern font */
+}
+
+.navbar {
+    background-color: #ffffff; /* White background for the navbar */
+}
+
+.navbar .navbar-brand {
+    color: #007bff; /* Primary blue for brand */
+}
+
+.navbar .nav-link {
+    color: #007bff; /* Primary blue for links */
+}
+
+.navbar .nav-link:hover {
+    color: #ffcc00; /* Yellow on hover */
+}
+
+.jumbotron {
+    border-radius: 10px; /* Rounded corners for the jumbotron */
+    margin-bottom: 30px; /* Space below the jumbotron */
+    background: linear-gradient(45deg, #ffffff, #f0f8ff); /* Light gradient background */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Blue button */
+    border-color: #007bff; /* Blue border */
+}
+
+.btn-danger {
+    background-color: #ffcc00; /* Yellow button */
+    border-color: #ffcc00; /* Yellow border */
+}
+
+.footer {
+    background-color: #343a40; /* Dark background */
+    padding: 20px 0;
+    color: white; /* White text color */
+}
+
+.footer a {
+    color: white; /* Keep link color white */
+    text-decoration: none; /* Remove underline */
+}
+
+.footer a:hover {
+    text-decoration: underline; /* Underline on hover for clarity */
+}
+
+#about {
+    background-color: #ffffff; /* White background for about section */
+    border-radius: 10px; /* Rounded corners */
+    padding: 30px; /* Add padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}

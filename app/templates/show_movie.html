@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ movie.title }} Details{% endblock %}
+
+{% block content %}
+<h2>{{ movie.name }}</h2>
+
+<p><strong>Director:</strong> {{ movie.director }}</p>
+<p><strong>Year:</strong> {{ movie.year }}</p>
+<p><strong>Genres:</strong>
+    {% for genre in movie.genres %}
+        {{ genre.name }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+</p>
+
+<hr>
+
+<h3>Your Reviews</h3>
+{% if user_reviews %}
+    <ul>
+    {% for review in user_reviews %}
+        <li>{{ review.text }} - <strong>Rating:</strong> {{ review.rating }}/5
+            <!-- Delete Review Button -->
+            <form action="{{ url_for('user_routes.delete_review', review_id=review.id) }}" method="POST" style="display:inline-block;">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No reviews yet for this movie.</p>
+{% endif %}
+
+<hr>
+
+<h3>Add a Review</h3>
+<form method="POST" action="{{ url_for('user_routes.show_movie', movie_id=movie.id) }}">
+     {{ form.hidden_tag() }}
+    <div class="form-group">
+        <textarea name="review" class="form-control" placeholder="Write your review" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="rating">Rating:</label>
+        <input type="number" name="rating" class="form-control" min="1" max="5" placeholder="Rating (1-5)" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+</form>
+
+<a href="{{ url_for('user_routes.get_user_movies', user_id=current_user.id) }}">Back to My Movies</a>
+
+{% endblock %}

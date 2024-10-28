@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron bg-light text-center shadow-sm">
+    <h1 class="display-4 text-primary">Welcome to MovieApp!</h1>
+    <p class="lead text-secondary">Your personal movie collection and review site.</p>
+
+    {% if not current_user.is_authenticated %}
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}" role="button">Login</a>
+            <a class="btn btn-danger btn-lg" href="{{ url_for('auth.signup') }}" role="button">Sign Up</a>
+        </p>
+    {% else %}
+        <p class="lead text-success">Welcome back, {{ current_user.name }}!</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('user_routes.get_user_movies') }}" role="button">View My Movies</a>
+    {% endif %}
+</div>
+
+<!-- About Project Section -->
+<section id="about" class="py-5">
+    <div class="container text-center">
+        <h2 class="display-4 text-primary">About MovieApp</h2>
+        <p class="lead text-secondary">MovieApp is your ultimate destination for managing your movie collection. Track your favorite films, share reviews, and discover new titles with ease. Our user-friendly interface ensures that you can quickly find what you're looking for, whether you're a casual viewer or a hardcore cinephile.</p>
+        <p>Join us on this cinematic journey and elevate your movie-watching experience!</p>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ movie.name }} Details{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <input type="text" name="name" class="form-control" value="{{ movie.name }}" required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="director" class="form-control" value="{{ movie.director }}" required>
+    </div>
+    <div class="form-group">
+        <input type="number" name="year" class="form-control" value="{{ movie.year }}" required>
+    </div>
+     <div class="form-group">
+        <label for="rating">Rating (0-10):</label>
+        <input type="number" step="0.1" min="0" max="10" name="rating" class="form-control" value="{{ movie.rating }}" required>
+    </div>
+    <div class="form-group">
+        <label for="genres">Select Genres</label>
+        <select name="genres" class="form-control" multiple>
+            {% for genre in genres %}
+                <option value="{{ genre.id }}" {% if genre in movie.genres %}selected{% endif %}>{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Update Movie</button>
+</form>
+{% endblock %}

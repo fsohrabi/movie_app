@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Add New Genre</h3>
+        <form method="POST" action="{{ url_for('admin_routes.add_genre') }}">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="Genre Name">
+            </div>
+             <div class="form-group">
+                <input type="text" name="description" class="form-control" placeholder="Genre Description">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Add Genre</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<h3>Users List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <a href="{{ url_for('admin_routes.delete_user', user_id=user.id) }}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Genres List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+             <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for genre in genres %}
+        <tr>
+            <td>{{ genre.name }}</td>
+             <td>{{ genre.description }}</td>
+            <td>
+                <a href="{{ url_for('admin_routes.delete_genre', genre_id=genre.id) }}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
